@@ -6,11 +6,14 @@ import java.awt.Graphics;
 public class Renderer {
     private static final long serialVersionUID = 1L;
 
-   // @Override
+    /*
+   @Override
     protected void paintComponent(Graphics g) {
-        // super.paintComponent(g);
+        super.paintComponent(g);
 
-        // DinosaurGame.dinosaurGame.repaint(g);
+        DinosaurGame.dinosaurGame.repaint(g);
 
     }
+
+     */
 }
