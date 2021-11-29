@@ -1,13 +1,14 @@
 package dinosaurGame;
 
 import javax.swing.JFrame;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
 
@@ -24,6 +25,14 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
 
     // Define character variable
     public Rectangle dinosaur;
+
+    // Define cactus array
+    public ArrayList<Rectangle> obstacles;
+
+    public int ticks, yMotion, score;
+
+    // Create boolean objects
+    public boolean gameOver, started;
 
     // Define random variable
     public Random rand;
@@ -59,9 +68,63 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
 
     }
 
+
+    // Add obstacle method
+    public void addObstacle(boolean start) {
+        int width = 17;
+        int height = 35;
+
+        if (start) {
+            obstacles.add(new Rectangle(WIDTH + width + (obstacles.size() - 1) * 200, 200, width, HEIGHT - height));
+        }
+
+    }
+
+    // Paint obstacle method
+    public void paintObstacle(Graphics g, Rectangle obstacle) {
+        g.setColor(Color.GRAY);
+        g.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+    }
+
+
     public static void main(String[] args) {
         dinosaurGame = new DinosaurGame();
     }
+
+
+
+/*
+    public void jump() {
+        if (gameOver) {
+            dinosaur = new Rectangle(WIDTH / 2 - 10, HEIGHT / 2 - 10, 20, 20);
+            obstacles.clear();
+            yMotion = 0;
+            score = 0;
+
+            addObstacle(true);
+            addObstacle(true);
+            addObstacle(true);
+            addObstacle(true);
+
+
+            gameOver = false;
+
+
+        }
+
+        if (!started) {
+            started = true;
+        }
+        else if (!gameOver) {
+            if (yMotion > 0) {
+                yMotion = 0;
+            }
+
+            yMotion -= 10;
+        }
+    }
+
+ */
 
 
     @Override
