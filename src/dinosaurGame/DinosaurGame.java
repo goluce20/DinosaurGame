@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
-import java.util.Timer;
+import javax.swing.Timer;
 
 public class DinosaurGame implements ActionListener, MouseListener, KeyListener {
 
@@ -35,7 +35,7 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
         JFrame jframe = new JFrame();
 
         // Create timer
-        // Timer timer = new Timer(20, this);
+        Timer timer = new Timer(20, this);
 
         // Initialize renderer object
         renderer = new Renderer();
@@ -54,7 +54,7 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
         dinosaur = new Rectangle(WIDTH / 2 - 10, HEIGHT / 2 - 10, 20, 20);
 
         // Start timer
-        // timer.start();
+        timer.start();
 
 
     }
