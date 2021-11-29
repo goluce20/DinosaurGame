@@ -50,9 +50,17 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
         jframe.setResizable(false);
         jframe.setVisible(true);
 
+        // Initialize dinosaur
+        dinosaur = new Rectangle(WIDTH / 2 - 10, HEIGHT / 2 - 10, 20, 20);
+
+        // Start timer
+        // timer.start();
 
 
+    }
 
+    public static void main(String[] args) {
+        dinosaurGame = new DinosaurGame();
     }
 
 
@@ -101,3 +109,4 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
 
     }
 }
+
