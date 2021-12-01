@@ -52,7 +52,7 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
         renderer = new Renderer();
 
         // JFrame settings
-        //jframe.add(renderer);
+        jframe.add(renderer);
         jframe.setTitle("Dinosaur Game");
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setSize(WIDTH, HEIGHT);
@@ -95,8 +95,8 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
 
 
 
-/*
-    public void jump() {
+
+    public void run() {
         if (gameOver) {
             dinosaur = new Rectangle(WIDTH / 2 - 10, HEIGHT / 2 - 10, 20, 20);
             obstacles.clear();
@@ -126,12 +126,20 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
         }
     }
 
- */
+
 
 
     public void repaint(Graphics g) {
         g.setColor(Color.red);
         g.fillRect(dinosaur.x, dinosaur.y, dinosaur.width, dinosaur.height);
+
+
+        g.setColor(Color.GRAY);
+        g.fillRect(0, HEIGHT - 120, WIDTH, 20);
+
+        for (Rectangle obstacle : obstacles) {
+            paintObstacle(g, obstacle);
+        }
 
     }
 
@@ -154,12 +162,14 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            run();
+        }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        run();
     }
 
     @Override
