@@ -1,7 +1,9 @@
 package dinosaurGame;
 
 import javax.swing.JFrame;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -127,8 +129,16 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
  */
 
 
+    public void repaint(Graphics g) {
+        g.setColor(Color.red);
+        g.fillRect(dinosaur.x, dinosaur.y, dinosaur.width, dinosaur.height);
+
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        renderer.repaint();
 
     }
 
