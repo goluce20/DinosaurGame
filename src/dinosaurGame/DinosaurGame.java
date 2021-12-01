@@ -64,6 +64,8 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
         // Initialize dinosaur
         dinosaur = new Rectangle(WIDTH / 2 - 10, HEIGHT / 2 - 10, 20, 20);
 
+        obstacles = new ArrayList<Rectangle>();
+
         // Start timer
         timer.start();
 
@@ -77,6 +79,10 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
         int height = 35;
 
         if (start) {
+            obstacles.add(new Rectangle(WIDTH + width + (obstacles.size() - 1) * 200, 200, width, HEIGHT - height));
+        }
+
+        else {
             obstacles.add(new Rectangle(WIDTH + width + (obstacles.size() - 1) * 200, 200, width, HEIGHT - height));
         }
 
@@ -148,6 +154,36 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
     public void actionPerformed(ActionEvent e) {
         renderer.repaint();
 
+        int speed = 10;
+
+        ticks ++;
+
+        if (started) {
+            for (int i = 0; i < obstacles.size(); i++) {
+                Rectangle obstacle = obstacles.get(i);
+
+                obstacle.x -= speed;
+            }
+
+            if (ticks % 2 == 0 && yMotion < 15) {
+                yMotion += 2;
+
+            }
+
+            for (int i = 0; i < obstacles.size(); i++) {
+                Rectangle column = obstacles.get(i);
+
+                if (column.x + column.width < 0) {
+                    obstacles.remove(column);
+
+                    if (column.y == 0) {
+                        addObstacle(false);
+                    }
+                }
+            }
+
+            dinosaur.y += yMotion;
+        }
     }
 
     @Override
