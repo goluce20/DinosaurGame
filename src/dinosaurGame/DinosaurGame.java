@@ -102,7 +102,7 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
 
 
 
-    public void run() {
+    public void jump() {
         if (gameOver) {
             dinosaur = new Rectangle(WIDTH / 2 - 10, HEIGHT / 2 - 10, 20, 20);
             obstacles.clear();
@@ -136,10 +136,11 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
 
 
     public void repaint(Graphics g) {
-        g.setColor(Color.red);
+        g.setColor(Color.GRAY.darker());
         g.fillRect(dinosaur.x, dinosaur.y, dinosaur.width, dinosaur.height);
 
 
+        // Creates ground
         g.setColor(Color.GRAY);
         g.fillRect(0, HEIGHT - 120, WIDTH, 20);
 
@@ -152,7 +153,7 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        renderer.repaint();
+
 
         int speed = 10;
 
@@ -183,7 +184,41 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
             }
 
             dinosaur.y += yMotion;
+
+
+            for (Rectangle obstacle : obstacles) {
+                if (obstacle.y == 0 && dinosaur.x + dinosaur.width / 2 > obstacle.x + obstacle.width / 2 - 10 && dinosaur.x + dinosaur.width / 2 < obstacle.x + obstacle.width / 2 + 10) {
+                    score++;
+                }
+
+                if (obstacle.intersects(dinosaur)) {
+                    gameOver = true;
+
+                    if (dinosaur.x <= obstacle.x) {
+                        dinosaur.x = obstacle.x - dinosaur.width;
+
+                    }
+                    else {
+                        if (obstacle.y != 0) {
+                            dinosaur.y = obstacle.y - dinosaur.height;
+
+                        }
+                        else if (dinosaur.y < obstacle.height) {
+                            dinosaur.y = obstacle.height;
+                        }
+                    }
+
+                }
+            }
+
+
+
+
+
         }
+
+        renderer.repaint();
+
     }
 
     @Override
@@ -199,13 +234,13 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            run();
+            jump();
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        run();
+        jump();
     }
 
     @Override
