@@ -124,12 +124,19 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
             started = true;
         }
         else if (!gameOver) {
+            if (dinosaur.y <= 20) {
+                dinosaur.y = 20;
+                yMotion = 0;
+            }
+
             if (yMotion > 0) {
                 yMotion = 0;
             }
 
             yMotion -= 10;
         }
+
+
     }
 
 
@@ -211,7 +218,9 @@ public class DinosaurGame implements ActionListener, MouseListener, KeyListener 
                 }
             }
 
-
+            if (dinosaur.y + yMotion >= HEIGHT - 120) {
+                dinosaur.y = HEIGHT - 120 - dinosaur.height;
+            }
 
 
 
